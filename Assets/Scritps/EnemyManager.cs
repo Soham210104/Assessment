@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    [SerializeField] Transform enemySpawn_01;
-    public GameObject BOT01;
+    [SerializeField] Transform enemySpawn_01,enemySpawn_02;
+    public GameObject BOT01,BOT02;
     // Start is called before the first frame update
     void Start()
     {
         SpawnEnemy(BOT01,enemySpawn_01.position);
+        SpawnEnemy(BOT02, enemySpawn_02.position);
     }
 
     // Update is called once per frame

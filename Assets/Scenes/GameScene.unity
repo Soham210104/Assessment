@@ -359,8 +359,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemySpawn_01: {fileID: 483682832}
-  enemySpawn_02: {fileID: 1753450294}
+  enemySpawn_02: {fileID: 887598316}
   BOT01: {fileID: 5379929401406402283, guid: 84c913ab8b00e7b4f8e71b4552c86b8a, type: 3}
+  BOT02: {fileID: 5096443139572536937, guid: c659c52ed18446d47a1b558238d49c68, type: 3}
 --- !u!1 &360238465
 GameObject:
   m_ObjectHideFlags: 0
