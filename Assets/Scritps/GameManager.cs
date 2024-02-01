@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public class GameManager : MonoBehaviour
 {
      Animator anim;
-    bool isJumping = false,isShoot = false;
+    bool isJumping = false,isShoot = false ,canJump = true;
     [SerializeField] float jumpForce = 5f,shootForce = 2f;
     public Transform spawnPoint;
     public GameObject bullets;
@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
         {
             Touch touch = Input.GetTouch(i);
 
-            if(touch.position.x < Screen.width/2 && !isJumping)
+            if(touch.position.x < Screen.width/2 && canJump)
             {
                 //Debug.Log("JUMP");
                 StartCoroutine(Jump());
@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator Jump()
     {
+        canJump = false;
         isJumping = true;
         anim.SetTrigger("isJump");
 
@@ -61,7 +62,16 @@ public class GameManager : MonoBehaviour
         Rb.AddForce(Vector2.right * shootForce, ForceMode2D.Impulse);
 
         isShoot = true;
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.2f);
         isShoot = false;
+    }
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.CompareTag("Ground"))
+        {
+            Debug.Log("Touched Ground");
+            canJump = true;
+        }
     }
 }
