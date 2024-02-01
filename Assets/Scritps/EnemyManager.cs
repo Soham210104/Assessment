@@ -4,24 +4,28 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    [SerializeField] Transform enemySpawn_01,enemySpawn_02;
-    public GameObject BOT01,BOT02;
-    // Start is called before the first frame update
+    public GameObject enemyPrefab;
+    private GameObject currentEnemy;
+    private float spawnDelay = 2f; 
+
     void Start()
     {
-        SpawnEnemy(BOT01,enemySpawn_01.position);
-        SpawnEnemy(BOT02, enemySpawn_02.position);
+        SpawnEnemy();
     }
 
-    // Update is called once per frame
     void Update()
     {
         
+        if (currentEnemy == null)
+        {
+            Invoke("SpawnEnemy", spawnDelay);
+        }
     }
 
-    void SpawnEnemy(GameObject BOT,Vector3 pos)
+    void SpawnEnemy()
     {
-        Instantiate(BOT, pos, Quaternion.identity);
+        // Instantiate enemy at a random position
+        Vector3 spawnPosition = new Vector3(10.71f, Random.Range(-0.71f, -2.51f), 0f);
+        currentEnemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
     }
-
 }
