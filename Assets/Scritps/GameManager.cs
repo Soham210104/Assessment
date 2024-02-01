@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
             }
             if(touch.position.x > Screen.width/2 && !isShoot)
             {
-                Debug.Log("SHOOT");
+                //Debug.Log("SHOOT");
                 StartCoroutine(Shoot());
             }
         }
