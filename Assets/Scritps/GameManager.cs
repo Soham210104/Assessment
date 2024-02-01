@@ -6,8 +6,11 @@ using UnityEngine.EventSystems;
 public class GameManager : MonoBehaviour
 {
      Animator anim;
-    bool isJumping = false;
-    [SerializeField] float jumpForce = 5f;
+    bool isJumping = false,isShoot = false;
+    [SerializeField] float jumpForce = 5f,shootForce = 2f;
+    public Transform spawnPoint;
+    public GameObject bullets;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -31,9 +34,10 @@ public class GameManager : MonoBehaviour
                 //Debug.Log("JUMP");
                 StartCoroutine(Jump());
             }
-            else if(touch.position.x > Screen.width/2)
+            if(touch.position.x > Screen.width/2 && !isShoot)
             {
                 Debug.Log("SHOOT");
+                StartCoroutine(Shoot());
             }
         }
     }
@@ -48,5 +52,16 @@ public class GameManager : MonoBehaviour
 
         anim.SetTrigger("isJump"); 
         isJumping = false;
+    }
+
+    IEnumerator Shoot()
+    {
+        GameObject bulletSpawn = Instantiate(bullets, spawnPoint.position, Quaternion.identity);
+        Rigidbody2D Rb = bulletSpawn.GetComponent<Rigidbody2D>();
+        Rb.AddForce(Vector2.right * shootForce, ForceMode2D.Impulse);
+
+        isShoot = true;
+        yield return new WaitForSeconds(0.3f);
+        isShoot = false;
     }
 }
