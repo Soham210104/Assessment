@@ -10,7 +10,7 @@ public class Destroy : MonoBehaviour
         
         if (other.CompareTag("Bullet"))
         {
-            Debug.Log("Hello");
+            //Debug.Log("Hello");
             // Destroy the bullet object
             Destroy(other.gameObject);
         }

@@ -17,4 +17,12 @@ public class EnemyMovement : MonoBehaviour
     {
         transform.Translate(Vector3.left * speed * Time.deltaTime);
     }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Bullet"))
+        {
+            Debug.Log("Hurt");
+        }
+    }
 }
